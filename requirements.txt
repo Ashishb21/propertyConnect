@@ -16,3 +16,6 @@ python-jose
 
 #for accessing form data
 python-multipart
+
+#jinja template
+jinja2
