@@ -1,0 +1,18 @@
+#fastapi
+fastapi
+uvicorn
+
+#for environmental variables
+python-dotenv
+
+#for email validation
+pydantic[email]
+
+#hashing
+passlib[bcrypt]
+
+#for creating jwt tokens
+python-jose
+
+#for accessing form data
+python-multipart
