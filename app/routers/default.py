@@ -13,12 +13,12 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 def root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "title": "FriendConnect - Home"})
+    return templates.TemplateResponse("index.html", {"request": request, "title": "PropertyConnect - Home"})
 
 @router.get("/login", response_class=HTMLResponse)
 def get_login(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request, "title": "FriendConnect - Login"})
+    return templates.TemplateResponse("login.html", {"request": request, "title": "PropertyConnect - Login"})
 
 @router.get("/register", response_class=HTMLResponse)
 def get_register(request: Request):
-    return templates.TemplateResponse("register.html",{"request": request, "title": "FriendConnect - Register"})
+    return templates.TemplateResponse("register.html",{"request": request, "title": "PropertyConnect - Register"})

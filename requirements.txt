@@ -19,3 +19,9 @@ python-multipart
 
 #jinja template
 jinja2
+
+#databases
+databases
+sqlalchemy
+asyncpg
+psycopg2-binary==2.8.6
