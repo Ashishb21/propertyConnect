@@ -25,3 +25,6 @@ databases
 sqlalchemy
 asyncpg
 psycopg2-binary==2.8.6
+
+#login manager
+fastapi-login

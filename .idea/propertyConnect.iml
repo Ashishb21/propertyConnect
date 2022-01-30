@@ -6,5 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="FastAPI_MongoDB" />
     <orderEntry type="module" module-name="5_todo_list" />
+    <orderEntry type="module" module-name="4_social_media_feed" />
   </component>
 </module>
