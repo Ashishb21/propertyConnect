@@ -49,3 +49,8 @@ def get_currentUser(db: Session = Depends(get_db), data: str = Depends(oauth2_sc
     )
 
     return verify_token(token=data, credentials_exception=credentials_exception, db=db)
+
+def set_expiry(token:str):
+    pass
+
+
