@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from core.database import engine,Base
 from core.exceptions import NotAuthenticatedException,not_authenticated_exception_handler
 import uvicorn
-
+from fastapi.middleware.cors import CORSMiddleware
 
 def include_router(app):
 
@@ -26,6 +26,12 @@ def configure_static(app):
 def start_application():
     app = FastAPI(title=settings.APP_TITLE, version=settings.APP_VERSION)
     include_router(app)
+    app.add_middleware(CORSMiddleware,
+                       allow_origins=["*"],
+                       allow_credentials=True,
+                       allow_methods=["*"],
+                       allow_headers=["*"],)
+
     configure_static(app)
     create_tables()
     return app

@@ -1,7 +1,10 @@
-from sqlalchemy import Column,Integer, String,Boolean
+from sqlalchemy import Column,Integer, String,Boolean,Enum,DateTime
 from sqlalchemy.orm import relationship
 from core.database import Base
 from sqlalchemy.sql.schema import ForeignKey
+import datetime
+from schemas.property import PropertyType
+from schemas.propertyclient import ClientType
 
 class User(Base):
 
@@ -23,7 +26,37 @@ class Property(Base):
     __tablename__ = "property"
 
     id = Column(String, primary_key=True, index=True, nullable=False)
-    name = Column(String, index=True, nullable=False)
+    propertyType=Column(String,Enum(PropertyType,name="property_types"))
+    propertyNo=Column(String)
+    location=Column(String,index=True)
+    sublocation=Column(String,index=True)
+    propertySize=Column(String)
+    totalSqYard=Column(String)
+    propertyRate=Column(String)
+    ratePerYard=Column(String)
+    comments=Column(String)
+    reference=Column(String)
     user_id = Column(String, ForeignKey("user.id"))
+    client_id =Column(String,ForeignKey("propertyclient.id"))
+
+    createdDate = Column(DateTime, default=datetime.datetime.utcnow)
+    modifiedDate = Column(DateTime, default=datetime.datetime.utcnow)
 
     user = relationship("User", back_populates="items")
+    client=relationship("PropertyClient",back_populates="items1")
+
+class PropertyClient(Base):
+
+    __tablename__="propertyclient"
+
+    id =Column(String,primary_key=True,index=True,nullable=False)
+    clientType=Column(String,Enum(ClientType,name="client_types"))
+    clientName=Column(String)
+    clientMobileno = Column(Integer)
+    clientEmail = Column(String, nullable=False, index=True)
+    clientAddress=Column(String)
+    items1=relationship("Property",back_populates="client")
+
+
+
+

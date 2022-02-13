@@ -31,6 +31,7 @@ def verify_token(token: str, credentials_exception, db: Session = Depends(get_db
         if email is None:
             raise credentials_exception
         token_data = email
+
     except PyJWTError:
         raise credentials_exception
 

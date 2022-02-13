@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from core.database import get_db
 from db.services.propertyservices import PropertyService
 from schemas.property import PropertySchema,ModifyPropertySchema
+from schemas.propertyclient import PropertyClient
 from core.token import get_currentUser
 from db.models.usermodels import User,Property
 
@@ -14,7 +15,7 @@ def getAllProperty(db: Session = Depends(get_db)):
     return PropertyService.get_all_Property(db=db)
 
 @router.post("/")
-def createProperty(property:PropertySchema, db: Session = Depends(get_db),current_user:User=Depends(get_currentUser)):
+def createProperty(property:PropertySchema,db: Session = Depends(get_db),current_user:User=Depends(get_currentUser)):
     return PropertyService.add_property(property=property,db=db,current_user=current_user)
 
 @router.put("/{property_id}")

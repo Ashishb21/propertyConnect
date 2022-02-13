@@ -39,4 +39,10 @@ def login(
 
 @router.post("/logout")
 def logout(token:str =Depends(oauth2_scheme)):
+    pass
 
+
+# @router.post('/create-token-disable')
+# def create_dynamic_token(Authorize: AuthJWT = Depends()):
+#     token = Authorize.create_access_token(subject="test",expires_time=False)
+#     return {"token": token}
