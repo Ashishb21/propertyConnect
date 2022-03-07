@@ -2,11 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from core.database import get_db
 from db.services.propertyservices import PropertyService
-from schemas.property import PropertySchema,ModifyPropertySchema
-from schemas.propertyclient import PropertyClient
+from schemas.property import PropertySchema,ModifyPropertySchema,PropertySearchSchema
+from schemas.propertyclient import PropertyClientSchema
 from core.token import get_currentUser
 from db.models.usermodels import User,Property
-
 
 router = APIRouter()
 
@@ -18,9 +17,9 @@ def getAllProperty(db: Session = Depends(get_db)):
 def createProperty(property:PropertySchema,db: Session = Depends(get_db),current_user:User=Depends(get_currentUser)):
     return PropertyService.add_property(property=property,db=db,current_user=current_user)
 
-@router.put("/{property_id}")
+@router.put("/updateProperty")
 def updateProperty(property:ModifyPropertySchema, db: Session = Depends(get_db),current_user:User=Depends(get_currentUser)):
-    return PropertyService.update_property(property=property,db=db,user=current_user)
+    return PropertyService.update_property(modifyproperty=property,db=db,user=current_user)
 
 @router.delete("/{property_id}")
 def deleteProperty(property_id: str, db: Session = Depends(get_db),current_user=Depends(get_currentUser)):
@@ -28,4 +27,10 @@ def deleteProperty(property_id: str, db: Session = Depends(get_db),current_user=
 
 @router.get("/getProperty_byUser")
 def getPropertyby_currentUser(db:Session=Depends(get_db),current_user:User=Depends(get_currentUser)):
-    return PropertyService.get_property_by_user(db=db,user=current_user)
+    property=PropertySchema()
+    return PropertyService.get_property_by_user(property=property,db=db,user=current_user)
+
+@router.post("/searchProperty")
+def searchPropertyby_currentUser(propertysearch:PropertySearchSchema,db:Session=Depends(get_db),current_user:User=Depends(get_currentUser)):
+
+    return PropertyService.search_property_by_user(propertysearch=propertysearch,db=db,user=current_user)

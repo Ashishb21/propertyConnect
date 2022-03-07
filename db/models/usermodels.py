@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer, String,Boolean,Enum,DateTime
+from sqlalchemy import Column, Numeric, String,Boolean,Enum,DateTime,BigInteger
 from sqlalchemy.orm import relationship
 from core.database import Base
 from sqlalchemy.sql.schema import ForeignKey
@@ -15,7 +15,7 @@ class User(Base):
     hashed_password = Column(String,nullable=False)
     is_active = Column(Boolean(),default=True)
     is_superuser = Column(Boolean(),default=False)
-    phone_no=Column(Integer)
+    phone_no=Column(BigInteger())
     items = relationship("Property", back_populates="user")
 
     def __repr__(self):
@@ -52,7 +52,7 @@ class PropertyClient(Base):
     id =Column(String,primary_key=True,index=True,nullable=False)
     clientType=Column(String,Enum(ClientType,name="client_types"))
     clientName=Column(String)
-    clientMobileno = Column(Integer)
+    clientMobileno = Column(BigInteger())
     clientEmail = Column(String, nullable=False, index=True)
     clientAddress=Column(String)
     items1=relationship("Property",back_populates="client")

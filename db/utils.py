@@ -1,5 +1,8 @@
 import databases
 from core.database import SQLALCHEMY_DATABASE_URL
+import logging
+log=logging.getLogger("propertyconnect-logger")
+
 
 async def check_db_connected():
     try:
@@ -8,9 +11,9 @@ async def check_db_connected():
             if not database.is_connected:
                 await database.connect()
                 await database.execute("SELECT 1")
-        print("Database is connected (^_^)")
+        log.info("Database is connected (^_^)")
     except Exception as e:
-        print(
+        log.info(
             "Looks like db is missing or is there is some problem in connection,see below traceback"
         )
         raise e
@@ -22,6 +25,6 @@ async def check_db_disconnected():
             database = databases.Database(SQLALCHEMY_DATABASE_URL)
             if database.is_connected:
                 await database.disconnect()
-        print("Database is Disconnected (-_-) zZZ")
+        log.info("Database is Disconnected (-_-) zZZ")
     except Exception as e:
         raise e
