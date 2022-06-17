@@ -15,7 +15,7 @@ import logging
 
 
 
-log=logging.getLogger("propertyconnect-logger")
+#log=logging.getLogger("propertyconnect-logger")
 
 def include_router(app):
 
@@ -34,8 +34,8 @@ def configure_static(app):
 def start_application():
 
     # logging
-    dictConfig(log_config)
-    app = FastAPI(title=settings.APP_TITLE, version=settings.APP_VERSION)
+    #dictConfig(log_config)
+    app = FastAPI(title="settings.APP_TITLE", version="settings.APP_VERSION")
     include_router(app)
     app.add_middleware(CORSMiddleware,
                        allow_origins=["*"],
@@ -44,7 +44,7 @@ def start_application():
                        allow_headers=["*"],)
 
     configure_static(app)
-    create_tables()
+    #create_tables()
     return app
 
 def create_tables():
@@ -70,12 +70,12 @@ if __name__ == "__main__":
     app = start_application()
 
 
-    @app.on_event("startup")
-    async def app_startup():
-        await check_db_connected()
-
-
-    @app.on_event("shutdown")
-    async def app_shutdown():
-        await check_db_disconnected()
+    # @app.on_event("startup")
+    # async def app_startup():
+    #     await check_db_connected()
+    #
+    #
+    # @app.on_event("shutdown")
+    # async def app_shutdown():
+    #     await check_db_disconnected()
     uvicorn.run(app, host="127.0.0.1", port=8000)

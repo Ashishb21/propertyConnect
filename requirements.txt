@@ -24,7 +24,7 @@ jinja2
 databases
 sqlalchemy
 asyncpg
-psycopg2-binary==2.8.6
+psycopg2-binary
 
 #login manager
 fastapi-login
